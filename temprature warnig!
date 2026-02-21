@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+
+THRESHOLD=75
+SENSOR_PATH="/sys/class/thermal/thermal_zone0/temp"
+INTERVAL=5
+
+while true; do
+    if [ -f "$SENSOR_PATH" ]; then
+        RAW_TEMP=$(cat "$SENSOR_PATH")
+        TEMP=$((RAW_TEMP / 1000))
+
+        echo "Current CPU Temperature: ${TEMP}°C"
+
+        if [ "$TEMP" -ge "$THRESHOLD" ]; then
+            echo "Warning! High CPU temperature: ${TEMP}°C"
+            notify-send "CPU Temperature Alert" "Warning! High CPU temperature: ${TEMP}°C"
+        fi
+    else
+        echo "Temperature sensor not found at $SENSOR_PATH"
+        exit 1
+    fi
+
+    sleep "$INTERVAL"
+done
