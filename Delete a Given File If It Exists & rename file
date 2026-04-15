@@ -1,0 +1,34 @@
+# Delete a Given File If It Exists
+
+#!/bin/bash
+
+read -p "Enter the file name for deletion: " file
+
+if [ -f $file ]
+then
+rm $file
+echo "The file $file deleted successfully!"
+else
+echo "Error! The file $file does not exist."
+fi
+Bash
+#RENAME FILE
+#!/bin/bash
+
+read -p "Enter the file name: " file
+read -p "Enter new file name: " new_file
+
+if [ -f $file ]
+then
+mv "$file" "$new_file"
+echo "The file $file has been renamed as $new_file!"
+else
+echo "Error! The file $file does not exist."
+fi
+Bash
+Output:
+
+Enter the file name: poem.txt
+Enter new file name: daffodils.txt
+
+The file poem.txt has been renamed as daffodils.txt!
